@@ -1,7 +1,11 @@
 package mygame;
 
 import com.jme3.app.SimpleApplication;
+<<<<<<< HEAD
 import com.jme3.asset.AssetManager;
+=======
+import com.jme3.audio.AudioNode;
+>>>>>>> 4d9ddbb7624fb91a437d0f5bc43d1b012eb1dbf5
 import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.control.CharacterControl;
 import com.jme3.collision.CollisionResults;
@@ -106,6 +110,9 @@ public class Main extends SimpleApplication {
         CharacterControl wot = player.initPlayer(viewPort, flyCam);
         bulletAppState.getPhysicsSpace().add(wot);
         player.setUpKeys(inputManager);
+        
+        // Play Music, Just a place holder until we get Nic's music
+        audio.playEnviro("Sounds/SC.ogg");
         
         
         
