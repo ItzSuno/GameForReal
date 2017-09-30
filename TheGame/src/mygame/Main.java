@@ -17,7 +17,7 @@ import com.jme3.scene.shape.Box;
  * @author normenhansen
  */
 public class Main extends SimpleApplication {
-
+    OurPlayer player1 = new OurPlayer();
     public static void main(String[] args) {
         Main app = new Main();
         app.start();
@@ -28,6 +28,7 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+
         flyCam.setMoveSpeed(100);
         
         // Activate physics
@@ -44,6 +45,7 @@ public class Main extends SimpleApplication {
         bulletAppState.getPhysicsSpace().add(scene.loadIsland3(islandsNode));
         bulletAppState.getPhysicsSpace().add(scene.loadIsland4(islandsNode));
         bulletAppState.getPhysicsSpace().add(scene.loadIsland5(islandsNode));
+
 
    
         // Light to see the scene
@@ -70,6 +72,7 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleUpdate(float tpf) {
+
         player.simpleUpdate(tpf, cam, listener);
         
     }
