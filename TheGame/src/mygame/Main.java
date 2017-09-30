@@ -10,6 +10,7 @@ import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.shape.Box;
+import mygame.CC.ApplicationContext;
 
 /**
  * This is the Main Class of your Game. You should only do initialization here.
@@ -17,9 +18,17 @@ import com.jme3.scene.shape.Box;
  * @author normenhansen
  */
 public class Main extends SimpleApplication {
+    
+    
+    public Main() {
+    
+    }
+    
+    private ApplicationContext applicationContext;
     //OurPlayer player1 = new OurPlayer();
     public static void main(String[] args) {
         Main app = new Main();
+        app.setShowSettings(false);
         app.start();
     }
     
@@ -29,7 +38,16 @@ public class Main extends SimpleApplication {
     @Override
     public void simpleInitApp() {
 
-        flyCam.setMoveSpeed(100);
+        //flyCam.setMoveSpeed(100);
+        
+        this.applicationContext = new ApplicationContext(stateManager,assetManager,settings,inputManager
+        ,rootNode,cam,flyCam);
+        
+        stateManager.attach(applicationContext);
+                
+              
+                
+         
         
         // Activate physics
         bulletAppState = new BulletAppState();
