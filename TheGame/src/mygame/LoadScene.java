@@ -21,4 +21,12 @@ public class LoadScene {
     LoadScene(AssetManager assMgr){
         assetManager = assMgr;  
     }  
+    
+    public Spatial loadIsland1(Node node){
+        Spatial island1 = assetManager.loadModel("Scenes/untitled.j3o");
+        node.attachChild(island1);
+        RigidBodyControl ground = new RigidBodyControl(0f);
+        island1.addControl(ground);
+        return island1;
+    }
 }
