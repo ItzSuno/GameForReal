@@ -24,6 +24,7 @@ public class OurPlayer implements ActionListener{
     private Vector3f camDir = new Vector3f();
     private Vector3f camLeft = new Vector3f();
     private Vector3f walkDirection = new Vector3f();
+    CapsuleCollisionShape capsuleShape;
   
     // Create our player
     public CharacterControl initPlayer(ViewPort viewPort, FlyByCamera flyCam){

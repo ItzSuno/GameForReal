@@ -2,6 +2,8 @@ package mygame;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
+import com.jme3.bullet.control.CharacterControl;
+import com.jme3.collision.CollisionResults;
 import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
@@ -9,6 +11,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 
 /**
@@ -45,8 +48,6 @@ public class Main extends SimpleApplication {
         bulletAppState.getPhysicsSpace().add(scene.loadIsland3(islandsNode));
         bulletAppState.getPhysicsSpace().add(scene.loadIsland4(islandsNode));
         bulletAppState.getPhysicsSpace().add(scene.loadIsland5(islandsNode));
-
-
    
         // Light to see the scene
         DirectionalLight dl = new DirectionalLight();
@@ -66,15 +67,25 @@ public class Main extends SimpleApplication {
       
         
         // Add player to the physicsSpace         //init player()
-        //bulletAppState.getPhysicsSpace().add(player.initPlayer(viewPort, flyCam));
-        //player.setUpKeys(inputManager);
+        CharacterControl wot = player.initPlayer(viewPort, flyCam);
+        bulletAppState.getPhysicsSpace().add(wot);
+        player.setUpKeys(inputManager);
+        
+        
+        
+        Node playersNode = new Node();
+        
+        
+        CollisionResults results = new CollisionResults();
+        //collidables.collideWith(playersNode, results);
+        
         
     }
 
     @Override
     public void simpleUpdate(float tpf) {
 
-        //player.simpleUpdate(tpf, cam, listener);
+        player.simpleUpdate(tpf, cam, listener);
         
     }
 
