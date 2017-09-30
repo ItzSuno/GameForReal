@@ -16,6 +16,7 @@ import com.jme3.scene.debug.Arrow;
 import com.jme3.scene.debug.Grid;
 import com.jme3.scene.debug.SkeletonDebugger;
 import com.jme3.scene.shape.Line;
+import static mygame.CC.SpatialUtils.makeGeometry;
 //import static org.jmonkey.utils.SpatialUtils.makeGeometry;
 
 /*

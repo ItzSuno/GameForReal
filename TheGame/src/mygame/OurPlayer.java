@@ -34,7 +34,7 @@ public class OurPlayer implements ActionListener{
         player.setJumpSpeed(20);
         player.setFallSpeed(30);
         player.setGravity(30);
-        player.setPhysicsLocation(new Vector3f(0, 15, 20));
+        player.setPhysicsLocation(new Vector3f(0, 15, -5));
         return player;  
     }
     

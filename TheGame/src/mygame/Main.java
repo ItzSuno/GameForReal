@@ -17,7 +17,7 @@ import com.jme3.scene.shape.Box;
  * @author normenhansen
  */
 public class Main extends SimpleApplication {
-    OurPlayer player1 = new OurPlayer();
+    //OurPlayer player1 = new OurPlayer();
     public static void main(String[] args) {
         Main app = new Main();
         app.start();
@@ -64,16 +64,17 @@ public class Main extends SimpleApplication {
         scene.simpleBox(6, 2, -240, collidables); 
         //bulletAppState.getPhysicsSpace().add(map.loadOurScene(rootNode));
       
+        
         // Add player to the physicsSpace         //init player()
-        bulletAppState.getPhysicsSpace().add(player.initPlayer(viewPort, flyCam));
-        player.setUpKeys(inputManager);
+        //bulletAppState.getPhysicsSpace().add(player.initPlayer(viewPort, flyCam));
+        //player.setUpKeys(inputManager);
         
     }
 
     @Override
     public void simpleUpdate(float tpf) {
 
-        player.simpleUpdate(tpf, cam, listener);
+        //player.simpleUpdate(tpf, cam, listener);
         
     }
 
