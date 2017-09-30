@@ -112,6 +112,7 @@ public class Main extends SimpleApplication {
         player.setUpKeys(inputManager);
         
         // Play Music, Just a place holder until we get Nic's music
+        Audio audio = new Audio(assetManager);
         audio.playEnviro("Sounds/SC.ogg");
         
         
