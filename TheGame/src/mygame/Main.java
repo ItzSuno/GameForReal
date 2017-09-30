@@ -13,7 +13,7 @@ import com.jme3.scene.shape.Box;
  * @author normenhansen
  */
 public class Main extends SimpleApplication {
-
+    OurPlayer player1 = new OurPlayer();
     public static void main(String[] args) {
         Main app = new Main();
         app.start();
@@ -23,6 +23,8 @@ public class Main extends SimpleApplication {
     public void simpleInitApp() {
         Box b = new Box(1, 1, 1);
         Geometry geom = new Geometry("Box", b);
+        player1.initPlayer(viewPort, flyCam);
+        
 
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         mat.setColor("Color", ColorRGBA.Blue);
@@ -34,6 +36,7 @@ public class Main extends SimpleApplication {
     @Override
     public void simpleUpdate(float tpf) {
         //TODO: add update code
+        player1.simpleUpdate(tpf, cam, listener);
     }
 
     @Override
