@@ -1,3 +1,5 @@
+/*
+
 package mygame;
 
 import com.jme3.asset.AssetManager;
@@ -17,7 +19,7 @@ import com.jme3.renderer.ViewPort;
 /**
  * @author normen
  * @author Harry-3d
- */
+ 
 
 public class OurPlayer implements ActionListener{
     private CharacterControl player;
@@ -42,7 +44,7 @@ public class OurPlayer implements ActionListener{
         player.setJumpSpeed(20);
         player.setFallSpeed(30);
         player.setGravity(30);
-        player.setPhysicsLocation(new Vector3f(0, 15, -5));
+        player.setPhysicsLocation(new Vector3f(0, 15, -5));s
         return player;  
     }
     
@@ -62,6 +64,7 @@ public class OurPlayer implements ActionListener{
     
     /** These are our custom actions triggered by key presses.
     * We do not walk yet, we just keep track of the direction the user pressed. */
+/*
       @Override
     public void onAction(String binding, boolean isPressed, float tpf) {
         if (binding.equals("Left")) {
@@ -83,7 +86,7 @@ public class OurPlayer implements ActionListener{
    * the camera direction forward (camDir) and to the side (camLeft).
    * The setWalkDirection() command is what lets a physics-controlled player walk.
    * We also make sure here that the camera moves with player.
-   */
+   
   
     public void simpleUpdate(float tpf, Camera cam, Listener listener) {
         camDir.set(cam.getDirection()).multLocal(0.6f);
@@ -111,4 +114,5 @@ public class OurPlayer implements ActionListener{
     }
   
 }
+*/
 
