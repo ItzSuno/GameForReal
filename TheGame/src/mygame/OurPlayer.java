@@ -1,5 +1,6 @@
 package mygame;
 
+import com.jme3.asset.AssetManager;
 import com.jme3.bullet.control.CharacterControl;
 import com.jme3.audio.Listener;
 import com.jme3.bullet.collision.shapes.CapsuleCollisionShape;
@@ -25,6 +26,12 @@ public class OurPlayer implements ActionListener{
     private Vector3f camLeft = new Vector3f();
     private Vector3f walkDirection = new Vector3f();
     CapsuleCollisionShape capsuleShape;
+    
+    
+               AssetManager assetManager;
+    OurPlayer(AssetManager assMgr){
+        assetManager = assMgr;  
+    }  
   
     // Create our player
     public CharacterControl initPlayer(ViewPort viewPort, FlyByCamera flyCam){
