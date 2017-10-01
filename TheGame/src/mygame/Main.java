@@ -36,6 +36,9 @@ public class Main extends SimpleApplication {
     public static Geometry boxFoot;
     CollisionResults results;
     Ray ray;
+    Node playersNode;
+    Node collidables;
+    
 
     @Override
     public void simpleInitApp() {
@@ -64,7 +67,7 @@ public class Main extends SimpleApplication {
         rootNode.addLight(dl);
         
         // Some objects for the player to collide with
-        Node collidables = new Node();
+        collidables = new Node();
         rootNode.attachChild(collidables);
         bulletAppState.getPhysicsSpace().add(scene.simpleBox(2, 1, 0, collidables));
         bulletAppState.getPhysicsSpace().add(scene.simpleBox(-1, 2, -60, collidables));
@@ -85,12 +88,12 @@ public class Main extends SimpleApplication {
         
         
         
-        Node playersNode = new Node();
+         playersNode = new Node();
         playersNode.setLocalTranslation(0f, 0f, 0f);
         //rootNode.attachChild(playersNode);
         playersNode.addControl(wot);
         
-        // Box at the players foot for deteching collisions
+        // Box at the players foot for detecting collisions
         Box box = new Box(1f, 1f, 1f);
         boxFoot = new Geometry("boxFoot", box);
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -104,11 +107,10 @@ public class Main extends SimpleApplication {
         
         
         
-        results = new CollisionResults();
         
         
-        int i = collidables.collideWith(ray, results);
-        //System.out.println(i);
+        
+
         
     }
         
@@ -118,14 +120,19 @@ public class Main extends SimpleApplication {
     @Override
     public void simpleUpdate(float tpf) {
         player.simpleUpdate(tpf, cam, listener);
+        
         ray = new Ray(cam.getLocation(), cam.getDirection());
         // Print the results so we see what is going on
+        results = new CollisionResults();
          for (int i = 0; i < results.size(); i++) {
            // For each “hit”, we know distance, impact point, geometry.
            float dist = results.getCollision(i).getDistance();
            Vector3f pt = results.getCollision(i).getContactPoint();
            String target = results.getCollision(i).getGeometry().getName();
            System.out.println("Selection #" + i + ": " + target + " at " + pt + ", " + dist + " WU away.");
+           
+            int ii = collidables.collideWith(ray, results);
+            System.out.println(ii);
          }
         
     }
