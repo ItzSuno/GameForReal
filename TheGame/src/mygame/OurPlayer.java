@@ -101,6 +101,12 @@ public class OurPlayer implements ActionListener{
         listener.setLocation(cam.getLocation());
         listener.setRotation(cam.getRotation());
         
+        Vector3f vec;
+        vec = cam.getLocation();
+        Main fmain = new Main();
+        //fmain.boxFoot.setLocalTranslation(vec);
+        
+        
     }
   
 }

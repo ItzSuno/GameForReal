@@ -7,6 +7,7 @@ import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.bullet.util.CollisionShapeFactory;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -82,6 +83,20 @@ public class LoadScene {
         boxGeo.setMaterial(mat);
         node.attachChild(boxGeo);
         boxGeo.setLocalTranslation(xPos, yPos, zPos);
+        CollisionShape colShape = CollisionShapeFactory.createMeshShape(boxGeo);
+        RigidBodyControl boxRigid = new RigidBodyControl(colShape, 0);
+        boxGeo.addControl(boxRigid);
+        return boxRigid;
+    }
+    
+    public RigidBodyControl simpleBox(Vector3f vec, Node node){
+        Box box = new Box(1f, 1f, 1f);
+        Geometry boxGeo = new Geometry("box", box);
+        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        mat.setColor("Color", ColorRGBA.randomColor());
+        boxGeo.setMaterial(mat);
+        node.attachChild(boxGeo);
+        boxGeo.setLocalTranslation(vec.x, vec.y, vec.z);
         CollisionShape colShape = CollisionShapeFactory.createMeshShape(boxGeo);
         RigidBodyControl boxRigid = new RigidBodyControl(colShape, 0);
         boxGeo.addControl(boxRigid);

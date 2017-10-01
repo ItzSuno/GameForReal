@@ -3,7 +3,10 @@ package mygame;
 import com.jme3.app.SimpleApplication;
 import com.jme3.audio.AudioNode;
 import com.jme3.bullet.BulletAppState;
+import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.control.CharacterControl;
+import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.bullet.util.CollisionShapeFactory;
 import com.jme3.collision.CollisionResults;
 import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
@@ -29,6 +32,7 @@ public class Main extends SimpleApplication {
     
     OurPlayer player = new OurPlayer();
     private BulletAppState bulletAppState;
+    public Geometry boxFoot;
 
     @Override
     public void simpleInitApp() {
@@ -79,6 +83,21 @@ public class Main extends SimpleApplication {
         
         
         Node playersNode = new Node();
+        playersNode.addControl(wot);
+        
+        // Box at the players foot for deteching collisions
+        Box box = new Box(1f, 1f, 1f);
+        boxFoot = new Geometry("box", box);
+        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        mat.setColor("Color", ColorRGBA.randomColor());
+        boxFoot.setMaterial(mat);
+        playersNode.attachChild(boxFoot);
+        CollisionShape colShape = CollisionShapeFactory.createMeshShape(boxFoot);
+        RigidBodyControl boxRigid = new RigidBodyControl(colShape, 0);
+        boxFoot.addControl(boxRigid);
+        bulletAppState.getPhysicsSpace().add(boxFoot);
+        
+        
         
         
         CollisionResults results = new CollisionResults();
