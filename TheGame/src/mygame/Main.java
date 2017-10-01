@@ -60,10 +60,10 @@ public class Main extends SimpleApplication {
         Node collidables = new Node();
         rootNode.attachChild(collidables);
         bulletAppState.getPhysicsSpace().add(scene.simpleBox(2, 1, 0, collidables));
-        scene.simpleBox(-1, 2, -60, collidables);
-        scene.simpleBox(5, 0, -120, collidables);
-        scene.simpleBox(6, 4, -180, collidables);
-        scene.simpleBox(6, 2, -240, collidables); 
+        bulletAppState.getPhysicsSpace().add(scene.simpleBox(-1, 2, -60, collidables));
+        bulletAppState.getPhysicsSpace().add(scene.simpleBox(5, 0, -120, collidables));
+        bulletAppState.getPhysicsSpace().add(scene.simpleBox(6, 4, -180, collidables));
+        bulletAppState.getPhysicsSpace().add(scene.simpleBox(6, 2, -240, collidables)); 
         //bulletAppState.getPhysicsSpace().add(map.loadOurScene(rootNode));
       
         
@@ -72,9 +72,9 @@ public class Main extends SimpleApplication {
         bulletAppState.getPhysicsSpace().add(wot);
         player.setUpKeys(inputManager);
         
-        // Play Music, Just a place holder until we get Nic's music
+        // Play Music
         Audio audio = new Audio(assetManager);
-        audio.playEnviro("Sounds/SC.ogg");
+        audio.playEnviro("Sounds/pi.ogg");
         
         
         
