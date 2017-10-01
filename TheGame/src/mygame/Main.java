@@ -8,6 +8,7 @@ import com.jme3.bullet.control.CharacterControl;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.bullet.util.CollisionShapeFactory;
 import com.jme3.collision.CollisionResults;
+import com.jme3.font.BitmapText;
 import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
@@ -18,8 +19,12 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
+<<<<<<< HEAD
 import com.jme3.texture.Texture;
 import com.jme3.util.SkyFactory;
+=======
+import com.jme3.ui.Picture;
+>>>>>>> 08a4a592da1b2cde42b736a9fb91d61ed45d9c99
 
 /**
  * This is the Main Class of your Game. You should only do initialization here.
@@ -36,6 +41,7 @@ public class Main extends SimpleApplication {
     OurPlayer player = new OurPlayer();
     private BulletAppState bulletAppState;
     public static Geometry boxFoot;
+    protected int score = 0;
     CollisionResults results;
     Ray ray;
     Node playersNode;
@@ -44,7 +50,8 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
-
+        
+        initCrossHairs();
         flyCam.setMoveSpeed(100);
         
         // Activate physics
@@ -67,6 +74,24 @@ public class Main extends SimpleApplication {
         dl.setColor(ColorRGBA.White);
         dl.setDirection(new Vector3f(2.8f, -2.8f, -2.8f).normalizeLocal());
         rootNode.addLight(dl);
+        
+        //HUD
+        
+        Picture hpBar = new Picture("Health Bar");
+        hpBar.setImage(assetManager, "Textures/HealthBar.png", true);
+        hpBar.setWidth(settings.getWidth()/4);
+        hpBar.setHeight(settings.getHeight()/4);
+        hpBar.setPosition(settings.getWidth()/5, settings.getHeight()/5);
+        guiNode.attachChild(hpBar);
+        
+        BitmapText scoreDisplay = new BitmapText(guiFont, false);          
+        scoreDisplay.setSize(guiFont.getCharSet().getRenderedSize());      // font size
+        scoreDisplay.setColor(ColorRGBA.Blue);                             // font color
+        scoreDisplay.setText("Score: "+ score );             // the text
+        scoreDisplay.setLocalTranslation(500, scoreDisplay.getLineHeight(), 5); // position
+        guiNode.attachChild(scoreDisplay);
+        
+        
         
         // Some objects for the player to collide with
         collidables = new Node();
@@ -121,7 +146,17 @@ public class Main extends SimpleApplication {
     }
         
         
-    
+      protected void initCrossHairs() {
+        setDisplayStatView(false);
+        guiFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
+        BitmapText ch = new BitmapText(guiFont, false);
+        ch.setSize(guiFont.getCharSet().getRenderedSize() * 2);
+        ch.setText("+"); // crosshairs
+        ch.setLocalTranslation( // center
+      settings.getWidth() / 2 - ch.getLineWidth()/2, settings.getHeight() / 2 + ch.getLineHeight()/2, 0);
+    guiNode.attachChild(ch);
+  }
+
 
     @Override
     public void simpleUpdate(float tpf) {
