@@ -66,7 +66,7 @@ public class LoadScene {
     }
             
     public Spatial loadIsland5(Node node){
-        Spatial island5 = assetManager.loadModel("Scenes/scene1/Desert.j3o");
+        Spatial island5 = assetManager.loadModel("Scenes/problem solved/Desert.j3o");
         island5.setLocalTranslation(0, -2, -240);
         node.attachChild(island5);
          CollisionShape islandShape5 = CollisionShapeFactory.createMeshShape(island5);

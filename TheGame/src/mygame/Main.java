@@ -11,6 +11,7 @@ import com.jme3.collision.CollisionResults;
 import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
@@ -32,7 +33,9 @@ public class Main extends SimpleApplication {
     
     OurPlayer player = new OurPlayer();
     private BulletAppState bulletAppState;
-    public Geometry boxFoot;
+    public static Geometry boxFoot;
+    CollisionResults results;
+    Ray ray;
 
     @Override
     public void simpleInitApp() {
@@ -48,10 +51,10 @@ public class Main extends SimpleApplication {
         Node islandsNode = new Node();
         rootNode.attachChild(islandsNode);
         LoadScene scene = new LoadScene(assetManager);
-        bulletAppState.getPhysicsSpace().add(scene.loadIsland1(islandsNode));
+        /*        bulletAppState.getPhysicsSpace().add(scene.loadIsland1(islandsNode));
         bulletAppState.getPhysicsSpace().add(scene.loadIsland2(islandsNode));
         bulletAppState.getPhysicsSpace().add(scene.loadIsland3(islandsNode));
-        bulletAppState.getPhysicsSpace().add(scene.loadIsland4(islandsNode));
+        bulletAppState.getPhysicsSpace().add(scene.loadIsland4(islandsNode));*/
         bulletAppState.getPhysicsSpace().add(scene.loadIsland5(islandsNode));
    
         // Light to see the scene
@@ -83,11 +86,13 @@ public class Main extends SimpleApplication {
         
         
         Node playersNode = new Node();
+        playersNode.setLocalTranslation(0f, 0f, 0f);
+        //rootNode.attachChild(playersNode);
         playersNode.addControl(wot);
         
         // Box at the players foot for deteching collisions
         Box box = new Box(1f, 1f, 1f);
-        boxFoot = new Geometry("box", box);
+        boxFoot = new Geometry("boxFoot", box);
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         mat.setColor("Color", ColorRGBA.randomColor());
         boxFoot.setMaterial(mat);
@@ -99,17 +104,29 @@ public class Main extends SimpleApplication {
         
         
         
+        results = new CollisionResults();
         
-        CollisionResults results = new CollisionResults();
-        //collidables.collideWith(playersNode, results);
         
+        int i = collidables.collideWith(ray, results);
+        //System.out.println(i);
         
     }
+        
+        
+    
 
     @Override
     public void simpleUpdate(float tpf) {
-
         player.simpleUpdate(tpf, cam, listener);
+        ray = new Ray(cam.getLocation(), cam.getDirection());
+        // Print the results so we see what is going on
+         for (int i = 0; i < results.size(); i++) {
+           // For each “hit”, we know distance, impact point, geometry.
+           float dist = results.getCollision(i).getDistance();
+           Vector3f pt = results.getCollision(i).getContactPoint();
+           String target = results.getCollision(i).getGeometry().getName();
+           System.out.println("Selection #" + i + ": " + target + " at " + pt + ", " + dist + " WU away.");
+         }
         
     }
 

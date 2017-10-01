@@ -103,8 +103,7 @@ public class OurPlayer implements ActionListener{
         
         Vector3f vec;
         vec = cam.getLocation();
-        Main fmain = new Main();
-        //fmain.boxFoot.setLocalTranslation(vec);
+        Main.boxFoot.setLocalTranslation(vec);
         
         
     }
