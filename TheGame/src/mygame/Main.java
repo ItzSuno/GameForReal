@@ -45,7 +45,8 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
-
+        
+        initCrossHairs();
         flyCam.setMoveSpeed(100);
         
         // Activate physics
@@ -136,7 +137,17 @@ public class Main extends SimpleApplication {
     }
         
         
-    
+      protected void initCrossHairs() {
+        setDisplayStatView(false);
+        guiFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
+        BitmapText ch = new BitmapText(guiFont, false);
+        ch.setSize(guiFont.getCharSet().getRenderedSize() * 2);
+        ch.setText("+"); // crosshairs
+        ch.setLocalTranslation( // center
+      settings.getWidth() / 2 - ch.getLineWidth()/2, settings.getHeight() / 2 + ch.getLineHeight()/2, 0);
+    guiNode.attachChild(ch);
+  }
+
 
     @Override
     public void simpleUpdate(float tpf) {
