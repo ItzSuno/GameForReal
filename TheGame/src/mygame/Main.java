@@ -18,6 +18,8 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
+import com.jme3.texture.Texture;
+import com.jme3.util.SkyFactory;
 
 /**
  * This is the Main Class of your Game. You should only do initialization here.
@@ -88,7 +90,7 @@ public class Main extends SimpleApplication {
         
         
         
-         playersNode = new Node();
+        playersNode = new Node();
         playersNode.setLocalTranslation(0f, 0f, 0f);
         //rootNode.attachChild(playersNode);
         playersNode.addControl(wot);
@@ -105,12 +107,16 @@ public class Main extends SimpleApplication {
         boxFoot.addControl(boxRigid);
         bulletAppState.getPhysicsSpace().add(boxFoot);
         
-        
-        
-        
-        
-        
+        // Skybox
+        Texture west = assetManager.loadTexture("Textures/skybox3.jpg");
+        Texture east = assetManager.loadTexture("Textures/skybox3.jpg");
+        Texture north = assetManager.loadTexture("Textures/skybox3.jpg");
+        Texture south = assetManager.loadTexture("Textures/skybox3.jpg");
+        Texture up = assetManager.loadTexture("Textures/skybox3.jpg");
+        Texture down = assetManager.loadTexture("Textures/skybox3.jpg");
 
+        Spatial sky = SkyFactory.createSky(assetManager, west, east, north, south, up, down);
+        rootNode.attachChild(sky);
         
     }
         
@@ -121,21 +127,9 @@ public class Main extends SimpleApplication {
     public void simpleUpdate(float tpf) {
         player.simpleUpdate(tpf, cam, listener);
         
-        ray = new Ray(cam.getLocation(), cam.getDirection());
-        // Print the results so we see what is going on
-        results = new CollisionResults();
-         for (int i = 0; i < results.size(); i++) {
-           // For each “hit”, we know distance, impact point, geometry.
-           float dist = results.getCollision(i).getDistance();
-           Vector3f pt = results.getCollision(i).getContactPoint();
-           String target = results.getCollision(i).getGeometry().getName();
-           System.out.println("Selection #" + i + ": " + target + " at " + pt + ", " + dist + " WU away.");
-           
-            int ii = collidables.collideWith(ray, results);
-            System.out.println(ii);
          }
         
-    }
+    
 
     @Override
     public void simpleRender(RenderManager rm) {
