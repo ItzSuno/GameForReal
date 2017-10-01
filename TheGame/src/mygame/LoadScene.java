@@ -35,7 +35,7 @@ public class LoadScene {
     }
     
     public Spatial loadIsland2(Node node){
-        Spatial island2 = assetManager.loadModel("Scenes/untitled.j3o");
+        Spatial island2 = assetManager.loadModel("Scenes/scene/Desert.j3o");
         island2.setLocalTranslation(0, -2, -60);
         node.attachChild(island2);
          CollisionShape islandShape2 = CollisionShapeFactory.createMeshShape(island2);
@@ -45,7 +45,7 @@ public class LoadScene {
     }
     
     public Spatial loadIsland3(Node node){
-        Spatial island3 = assetManager.loadModel("Scenes/untitled.j3o");
+        Spatial island3 = assetManager.loadModel("Scenes/scene/Desert.j3o");
         island3.setLocalTranslation(0, -2, -120);
         node.attachChild(island3);
          CollisionShape islandShape3 = CollisionShapeFactory.createMeshShape(island3);
@@ -55,7 +55,7 @@ public class LoadScene {
     }
         
     public Spatial loadIsland4(Node node){
-        Spatial island4 = assetManager.loadModel("Scenes/untitled.j3o");
+        Spatial island4 = assetManager.loadModel("Scenes/scene/Desert.j3o");
         island4.setLocalTranslation(0, -2, -180);
         node.attachChild(island4);
          CollisionShape islandShape4 = CollisionShapeFactory.createMeshShape(island4);
@@ -65,7 +65,7 @@ public class LoadScene {
     }
             
     public Spatial loadIsland5(Node node){
-        Spatial island5 = assetManager.loadModel("Scenes/untitled.j3o");
+        Spatial island5 = assetManager.loadModel("Scenes/scene/Desert.j3o");
         island5.setLocalTranslation(0, -2, -240);
         node.attachChild(island5);
          CollisionShape islandShape5 = CollisionShapeFactory.createMeshShape(island5);
@@ -73,9 +73,7 @@ public class LoadScene {
         island5.addControl(ground5);
         return island5;
     }
-    
-
-    
+  
     public RigidBodyControl simpleBox(float xPos, float yPos, float zPos, Node node){
         Box box = new Box(1f, 1f, 1f);
         Geometry boxGeo = new Geometry("box", box);
@@ -84,7 +82,8 @@ public class LoadScene {
         boxGeo.setMaterial(mat);
         node.attachChild(boxGeo);
         boxGeo.setLocalTranslation(xPos, yPos, zPos);
-        RigidBodyControl boxRigid = new RigidBodyControl(1f);
+        CollisionShape colShape = CollisionShapeFactory.createMeshShape(boxGeo);
+        RigidBodyControl boxRigid = new RigidBodyControl(colShape, 0);
         boxGeo.addControl(boxRigid);
         return boxRigid;
     }
